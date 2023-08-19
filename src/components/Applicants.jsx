@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Applicants = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => {
-    console.log("first", state.app);
+    console.log(state.app);
     return state.app;
   });
   useEffect(() => {
