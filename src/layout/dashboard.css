@@ -1,0 +1,46 @@
+.top-navbar{
+  display: flex;
+ /* margin-bottom: rem; */
+  padding: 16px;
+  background-color: beige;
+  gap: 4rem;
+}
+.admin-list{
+  list-style-type: none !important;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  font-weight: 800;
+  color: black !important;
+}
+.admin-list:hover{
+  background-color: rgb(240, 194, 169);
+  color:rgb(240, 194, 169);
+}
+.below-content {
+  display: flex;
+  width: 100%;
+
+}
+/* 
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+
+
+  width: 20%;
+  
+  background-color: rgb(237, 228, 228);
+  color:black;
+  justify-content: center;
+  align-items: center;
+} */
+.content {
+ 
+  
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
