@@ -5,12 +5,10 @@ import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-const Applicants = () => {
+const ShortlistCandidate = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => {
-    // console.log("first", state.app);
-    return state.app;
-  });
+  const data = useSelector((state) => state.app.shortListedUser);
+  console.log("candidta", data);
   useEffect(() => {
     dispatch(getData());
   }, [dispatch]);
@@ -18,7 +16,7 @@ const Applicants = () => {
   if (data.loading) {
     return <h2>Loading...</h2>;
   }
-  // console.log("aplicants", data);
+  console.log("aplicants", data);
   return (
     <div>
       <table>
@@ -35,7 +33,7 @@ const Applicants = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.users?.map((user) => (
+          {data?.map((user) => (
             <tr key={user.id}>
               <td className="p-3"> {user.serialNumber}</td>
               <td className="p-3 text-green-700 cursor-pointer">
@@ -69,4 +67,4 @@ const Applicants = () => {
   );
 };
 
-export default Applicants;
+export default ShortlistCandidate;

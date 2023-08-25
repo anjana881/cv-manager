@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <>
-      <div className=" flex flex-col justify-center items-center bg-slate-100 p-6">
+      <div className=" flex flex-col justify-center items-center bg-slate-100 p-6 ">
         <h1 className="font-bold text-4xl"> Amnil </h1>
         <h1 className="font-bold text-3xl mb-1">Technologies</h1>
         <hr className="bg-black w-[100%] h-1 mb-8" />
@@ -26,6 +26,14 @@ const Sidebar = () => {
             </i>
             <Link to="/applicants" className="text-lg font-semibold">
               Applicants
+            </Link>
+          </li>
+          <li className="flex items-center mb-6">
+            <i className="mr-4">
+              <BsFillPersonFill />
+            </i>
+            <Link to="/shortlisted" className="text-lg font-semibold">
+              Shortlisted Candidates
             </Link>
           </li>
           <li className="flex items-center mb-6">

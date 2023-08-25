@@ -5,6 +5,9 @@ import Interviews from "./components/Interviews";
 import Assessment from "./components/Assessment";
 import DashboardContent from "./components/DashboardContent";
 import Profile from "./components/Profile";
+import ShortlistCandidate from "./components/ShortlistCandidate";
+
+import Calendar1 from "./components/Calendar1";
 
 const route = createBrowserRouter([
   {
@@ -20,6 +23,10 @@ const route = createBrowserRouter([
         element: <Applicants />,
       },
       {
+        path: "shortlisted",
+        element: <ShortlistCandidate />,
+      },
+      {
         path: "profile/:serialNumber",
         element: <Profile />,
       },
@@ -32,6 +39,10 @@ const route = createBrowserRouter([
       {
         path: "assessments",
         element: <Assessment />,
+      },
+      {
+        path: "calendar",
+        element: <Calendar1 />,
       },
     ],
   },

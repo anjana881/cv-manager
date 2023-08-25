@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import UserSlice, { getData } from "../features/UserSlice";
+import UserSlice, { addShortListedUser, getData } from "../features/UserSlice";
 import "./Profile.css";
 
 import boy from "../Assests/129-1290805_person-head-and-shoulders-silhouette-hd-png-download.png";
@@ -15,12 +15,14 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getData());
   }, [dispatch]);
-  console.log("Users:", users);
 
   const currentUser = users.find(
     (user) => user.serialNumber === Number(serialNumber)
   );
-
+  const handleClick = () => {
+    dispatch(addShortListedUser(currentUser));
+  };
+  // console.log("currentUsers:", currentUser);
   if (!currentUser) {
     return <div>Loading...</div>;
   }
@@ -106,6 +108,9 @@ const Profile = () => {
               </p>
             </h2>
           </div>
+          <button className="bg-blue-500 p-4" onClick={handleClick}>
+            Shortlist{" "}
+          </button>
         </div>
       </div>
     </div>
