@@ -1,6 +1,6 @@
 .top-navbar{
   display: flex;
- /* margin-bottom: rem; */
+
   padding: 16px;
   background-color: beige;
   gap: 4rem;
@@ -18,29 +18,16 @@
 }
 .below-content {
   display: flex;
+
   width: 100%;
 
 }
-/* 
-.left-sidebar {
-  display: flex;
-  flex-direction: column;
-
-
-  width: 20%;
-  
-  background-color: rgb(237, 228, 228);
-  color:black;
-  justify-content: center;
-  align-items: center;
-} */
 .content {
- 
-  
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 85%;
   align-items: center;
   justify-content: center;
 }
 
+/*    events={[{ title: "event 1", date: "2023-08-01" }]} */

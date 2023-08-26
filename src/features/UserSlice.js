@@ -11,6 +11,7 @@ export const UserSlice = createSlice({
   name: "UserSlice",
   initialState: {
     users: [],
+    shortListedUser: [],
     loading: false,
     error: null,
   },
@@ -30,5 +31,12 @@ export const UserSlice = createSlice({
       state.error = action.payload;
     },
   },
+  reducers: {
+    addShortListedUser: (state, action) => {
+      state.shortListedUser.push(action.payload);
+    },
+  },
 });
 export default UserSlice.reducer;
+
+export const { addShortListedUser } = UserSlice.actions;

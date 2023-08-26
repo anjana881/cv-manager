@@ -32,7 +32,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="below-content">
+      <div className="below-content bg-zinc-50">
         <div className="left-sidebar">
           <Sidebar />
         </div>
