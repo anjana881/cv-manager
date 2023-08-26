@@ -3,6 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { GrNotification } from "react-icons/gr";
 import { Outlet } from "react-router-dom";
 import "./dashboard.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import logo from "../Assests/logo.PNG";
 import Sidebar from "../components/Sidebar";
