@@ -6,7 +6,7 @@ import "./Profile.css";
 
 import boy from "../Assests/129-1290805_person-head-and-shoulders-silhouette-hd-png-download.png";
 
-import girl from "../Assests/images.png";
+import { toast } from "react-toastify";
 const Profile = () => {
   const { serialNumber } = useParams();
   const dispatch = useDispatch();
@@ -20,7 +20,13 @@ const Profile = () => {
     (user) => user.serialNumber === Number(serialNumber)
   );
   const handleClick = () => {
-    dispatch(addShortListedUser(currentUser));
+    if (!users[currentUser.id].shortListed) {
+      dispatch(addShortListedUser(currentUser));
+      toast("Candidate shortlisted sucessfully.", { type: "success" });
+    }
+    if (users[currentUser.id].shortListed) {
+      return toast("Candidate already shortlisted", { type: "error" });
+    }
   };
   // console.log("currentUsers:", currentUser);
   if (!currentUser) {
@@ -32,7 +38,7 @@ const Profile = () => {
       <h1 className="text-2xl font-semibold mb-8">Profile Details</h1>
       <div className=" flex justify-evenly  ">
         <div className="image  w-[16%] h-[10%]  rounded-lg ">
-          <img src={boy} alt="image" className="mb-2" />
+          <img src={boy} alt="img" className="mb-2" />
 
           <h1 className="flex  font-semibold underline  ">
             Cv url:
@@ -108,8 +114,15 @@ const Profile = () => {
               </p>
             </h2>
           </div>
-          <button className="bg-blue-500 p-4" onClick={handleClick}>
-            Shortlist{" "}
+          <button
+            className={` p-4 text-white rounded-3xl w-[150px] mt-4 ${
+              users[currentUser.id].shortListed
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500"
+            }`}
+            onClick={handleClick}
+          >
+            Shortlist
           </button>
         </div>
       </div>

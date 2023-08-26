@@ -14,6 +14,7 @@ export const UserSlice = createSlice({
     shortListedUser: [],
     loading: false,
     error: null,
+    shortListed: false,
   },
   extraReducers: {
     [getData.pending]: (state) => {
@@ -34,6 +35,7 @@ export const UserSlice = createSlice({
   reducers: {
     addShortListedUser: (state, action) => {
       state.shortListedUser.push(action.payload);
+      state.users[action.payload.id].shortListed = true;
     },
   },
 });
