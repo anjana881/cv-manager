@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../features/UserSlice";
 import { AiFillEdit } from "react-icons/ai";
@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 const Applicants = () => {
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
   const data = useSelector((state) => {
     // console.log("first", state.app);
     return state.app;
@@ -18,9 +19,22 @@ const Applicants = () => {
   if (data.loading) {
     return <h2>Loading...</h2>;
   }
-  // console.log("aplicants", data);
+  //Filter applicants based on search term
+  const filteredUsers = data?.users?.filter((user) => {
+    const fullName = `${user.FirstName} ${user.LastName}`.toLowerCase();
+    return fullName.includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div>
+      <input
+        type="search"
+        name="search"
+        placeholder="Search by name"
+        id=""
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Update search term state
+      />
       <table>
         <thead>
           <tr>
@@ -35,7 +49,7 @@ const Applicants = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.users?.map((user) => (
+          {filteredUsers?.map((user) => (
             <tr key={user.id}>
               <td className="p-3"> {user.serialNumber}</td>
               <td className="p-3 text-green-700 cursor-pointer">

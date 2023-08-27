@@ -65,7 +65,7 @@ const Sidebar = () => {
             <i className="mr-4">
               <SlEnvolopeLetter />
             </i>
-            <Link to="/applicants" className="text-lg font-semibold">
+            <Link to="offer" className="text-lg font-semibold">
               Offer Letter
             </Link>
           </li>

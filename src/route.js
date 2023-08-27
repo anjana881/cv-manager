@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import ShortlistCandidate from "./components/ShortlistCandidate";
 
 import Calendar1 from "./components/Calendar1";
+import OfferLetter from "./components/OfferLetter";
 
 const route = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const route = createBrowserRouter([
       {
         path: "assessments",
         element: <Assessment />,
+      },
+      {
+        path: "offer",
+        element: <OfferLetter />,
       },
       {
         path: "calendar",

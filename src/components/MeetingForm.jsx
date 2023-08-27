@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
+import { AiFillDelete } from "react-icons/ai";
 
-const MeetingForm = ({ selectedDate, onClose, onSubmit, eventData }) => {
+const MeetingForm = ({
+  selectedDate,
+  onClose,
+  onSubmit,
+  onDelete,
+  eventData,
+}) => {
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -50,6 +57,14 @@ const MeetingForm = ({ selectedDate, onClose, onSubmit, eventData }) => {
     setEndTime("");
   };
 
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      onDelete(eventData);
+      onClose();
+    }
+  };
+  console.log("handleDelete", handleDelete);
+
   return (
     <Modal isOpen={true} onRequestClose={onClose} contentLabel="Meeting Form">
       <h2>{eventData ? "Edit Meeting" : "Schedule a Meeting"}</h2>
@@ -84,6 +99,11 @@ const MeetingForm = ({ selectedDate, onClose, onSubmit, eventData }) => {
         <button type="submit">
           {eventData ? "Update Meeting" : "Schedule Meeting"}
         </button>
+        {eventData && (
+          <button type="button" onClick={handleDelete}>
+            <AiFillDelete />
+          </button>
+        )}
         <button type="button" onClick={onClose}>
           Cancel
         </button>
