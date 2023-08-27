@@ -1,5 +1,6 @@
 const user = [
   {
+    Id: 1,
     FirstName: "Anjana",
     LastName: "Bhattrai",
     DOB: "1999/5/14",
@@ -16,6 +17,7 @@ const user = [
     ExpectedSalary: 15000,
   },
   {
+    Id: 2,
     FirstName: "John",
     LastName: "Doe",
     DOB: "1985/10/20",
@@ -32,6 +34,7 @@ const user = [
     ExpectedSalary: 50000,
   },
   {
+    Id: 3,
     FirstName: "Emily",
     LastName: "Johnson",
     DOB: "1992/7/8",
@@ -48,6 +51,7 @@ const user = [
     ExpectedSalary: 80000,
   },
   {
+    Id: 4,
     FirstName: "Emma",
     LastName: "Smith",
     DOB: "1992/8/10",
@@ -64,6 +68,7 @@ const user = [
     ExpectedSalary: 75000,
   },
   {
+    Id: 5,
     FirstName: "Michael",
     LastName: "Johnson",
     DOB: "1988/11/5",
@@ -80,6 +85,7 @@ const user = [
     ExpectedSalary: 60000,
   },
   {
+    Id: 6,
     FirstName: "Sophia",
     LastName: "Lee",
     DOB: "2000/2/18",

@@ -9,6 +9,8 @@ import ShortlistCandidate from "./components/ShortlistCandidate";
 
 import Calendar1 from "./components/Calendar1";
 import OfferLetter from "./components/OfferLetter";
+import CreateForm from "./components/CreateForm";
+import EditUser from "./components/EditUser";
 
 const route = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const route = createBrowserRouter([
       {
         path: "applicants",
         element: <Applicants />,
+      },
+      {
+        path: "CreateForm",
+        element: <CreateForm />,
+      },
+      {
+        path: "editUser/:id",
+        element: <EditUser />,
       },
       {
         path: "shortlisted",

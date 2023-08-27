@@ -3,40 +3,55 @@ import user from "../user";
 
 export const getData = createAsyncThunk("fetchUsers", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
   return user;
 });
 
 export const UserSlice = createSlice({
   name: "UserSlice",
   initialState: {
-    users: [],
+    users: user,
     shortListedUser: [],
-    loading: false,
-    error: null,
-  },
-  extraReducers: {
-    [getData.pending]: (state) => {
-      state.loading = true;
-    },
-    [getData.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.users = action.payload.map((user, index) => ({
-        ...user,
-        serialNumber: index + 1,
-      }));
-    },
-    [getData.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
   },
   reducers: {
     addShortListedUser: (state, action) => {
       state.shortListedUser.push(action.payload);
     },
+    createUser: (state, action) => {
+      state.users.push(action.payload);
+      console.log("state", state.users);
+    },
+    editUser: (state, actions) => {
+      const {
+        Id,
+
+        FirstName,
+        LastName,
+        PrimaryEmail,
+        // position,
+        // select,
+        PrimaryPhoneNumber,
+        ExperienceInMonthsWithCompanyName,
+        // city,
+        ExpectedSalary,
+      } = actions.payload;
+      const updateUser = state.users.find((user) => user.Id == Id);
+      if (updateUser) {
+        updateUser.Id = Id;
+        // updateUser.photo = photo;
+        updateUser.FirstName = FirstName;
+        updateUser.LastName = LastName;
+        updateUser.PrimaryEmail = PrimaryEmail;
+
+        // updateUser.select = select;
+        // updateUser.city = city;
+        updateUser.ExpectedSalary = ExpectedSalary;
+        updateUser.PrimaryPhoneNumber = PrimaryPhoneNumber;
+        updateUser.ExperienceInMonthsWithCompanyName =
+          ExperienceInMonthsWithCompanyName;
+      }
+    },
   },
 });
 export default UserSlice.reducer;
 
-export const { addShortListedUser } = UserSlice.actions;
+export const { addShortListedUser, createUser, editUser } = UserSlice.actions;
