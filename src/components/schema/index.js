@@ -8,12 +8,12 @@ export const Yupschema = Yup.object({
   // position: Yup.string().required("please enter your Position"),
   // select: Yup.string().required("please select your Level"),
 
-  PrimaryPhoneNumber: Yup.number().required("Please Enter you Phone Number"),
+  PrimaryPhoneNumber: Yup.number().required("Please Enter your Phone Number"),
   ExperienceInMonthsWithCompanyName: Yup.string().required(
     "please enter your Experience"
   ),
-  // city: Yup.string().required("please enter your City"),
+  DOB: Yup.string().required("please enter your Date of Birth"),
   ExpectedSalary: Yup.string().required("please enter your Salary Expectation"),
-
+  HighestLevelOfEducation: Yup.string().required("please enter your Degree"),
   // image: Yup.mixed().required(),
 });

@@ -12,6 +12,7 @@ export const UserSlice = createSlice({
     users: user,
     shortListedUser: [],
   },
+
   reducers: {
     addShortListedUser: (state, action) => {
       state.shortListedUser.push(action.payload);
@@ -27,11 +28,10 @@ export const UserSlice = createSlice({
         FirstName,
         LastName,
         PrimaryEmail,
-        // position,
-        // select,
+
         PrimaryPhoneNumber,
         ExperienceInMonthsWithCompanyName,
-        // city,
+
         ExpectedSalary,
       } = actions.payload;
       const updateUser = state.users.find((user) => user.Id == Id);

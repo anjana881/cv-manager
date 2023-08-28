@@ -37,15 +37,27 @@ const Applicants = () => {
 
   return (
     <div>
-      <button onClick={handleAdd}>Add more</button>
-      <input
-        type="search"
-        name="search"
-        placeholder="Search by name"
-        id=""
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Update search term state
-      />
+      <div className="flex justify-between mb-4 ">
+        <div>
+          <button
+            onClick={handleAdd}
+            className="p-2 text-black font-semibold bg-[#F53139] rounded-3xl w-[150px] "
+          >
+            Create User
+          </button>
+        </div>
+        <div>
+          <input
+            type="search"
+            name="search"
+            placeholder="Search by name"
+            className="p-3 text-black rounded-2xl max-w-2xl "
+            id=""
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} // Update search term state
+          />
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
@@ -60,14 +72,14 @@ const Applicants = () => {
           </tr>
         </thead>
         <tbody>
-          {userData?.map((user, index) => (
+          {filteredUsers?.map((user, index) => (
             <tr key={index}>
               <td className="p-3"> {user?.Id}</td>
               <td className="p-3 text-green-700 cursor-pointer">
                 <Link
                   to={{
-                    pathname: `/profile/${user?.serialNumber}`,
-                    state: { user: user }, // Make sure 'user' is defined and has valid data
+                    pathname: `/profile/${user?.Id}`,
+                    state: { user: user },
                   }}
                 >
                   {user?.FirstName} {user?.LastName}

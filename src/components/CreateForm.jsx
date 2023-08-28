@@ -15,13 +15,11 @@ const CreateForm = () => {
     FirstName: "",
     LastName: "",
     PrimaryEmail: "",
-    position: "",
-    photo: "",
-    select: "",
+
+    DOB: "",
     PrimaryPhoneNumber: "",
-    ExperienceInMonthsWithCompanyName: "",
-    city: "",
-    ExpectedSalary: "",
+
+    HighestLevelOfEducation: "",
   };
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
@@ -40,7 +38,7 @@ const CreateForm = () => {
         onSubmit={handleSubmit}
         className="flex py-5 px-1 w-full gap-4"
       >
-        <div className="w-[60%] flex flex-col gap-4">
+        <div className=" w-[80%] p-8 flex flex-col justify-center gap-4">
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
               <input
@@ -102,60 +100,14 @@ const CreateForm = () => {
                 htmlFor="floating_phone"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Phone number (98********)
+                Phone number (+977-98********)
               </label>
               {errors.PrimaryPhoneNumber && touched.PrimaryPhoneNumber ? (
                 <p className="text-red-700">{errors.PrimaryPhoneNumber}</p>
               ) : null}
             </div>
-            {/* <div className="relative z-0 w-full mb-6 group">
-              <input
-                type="text"
-                name="city"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                value={values.city}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                required
-              />
-              <label
-                htmlFor="floating_city"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                City
-              </label>
-              {errors.city && touched.city ? (
-                <p className="text-red-700">{errors.city}</p>
-              ) : null}
-            </div> */}
           </div>
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-6 group">
-              <input
-                type="text"
-                name="ExperienceInMonthsWithCompanyName"
-                id="floating_first_name"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                value={values.ExperienceInMonthsWithCompanyName}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                required
-              />
-              <label
-                htmlFor="floating_first_name"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Experience
-              </label>
-              {errors.ExperienceInMonthsWithCompanyName &&
-              touched.ExperienceInMonthsWithCompanyName ? (
-                <p className="text-red-700">
-                  {errors.ExperienceInMonthsWithCompanyName}
-                </p>
-              ) : null}
-            </div>
             <div className="relative z-0 w-full mb-6 group">
               <input
                 type="number"
@@ -175,6 +127,28 @@ const CreateForm = () => {
               </label>
               {errors.Id && touched.Id ? (
                 <p className="text-red-700">{errors.Id}</p>
+              ) : null}
+            </div>
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="date"
+                name="DOB"
+                id="floating_Dob"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                value={values.DOB}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                required
+              />
+              <label
+                htmlFor="floating_first_name"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                DOB
+              </label>
+              {errors.DOB && touched.DOB ? (
+                <p className="text-red-700">{errors.DOB}</p>
               ) : null}
             </div>
           </div>
@@ -202,65 +176,27 @@ const CreateForm = () => {
           <div className="relative z-0 w-full mb-6 group">
             <input
               type="text"
-              name="ExpectedSalary"
-              id="floating_repeat_password"
+              name="HighestLevelOfEducation"
+              id="floating_HighestLevelOfEducation"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
-              value={values.ExpectedSalary}
+              value={values.HighestLevelOfEducation}
               onChange={handleChange}
               onBlur={handleBlur}
               required
             />
             <label
-              htmlFor="floating_repeat_password"
+              htmlFor="floating_HighestLevelOfEducation"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Salary Expectation
+              HighestLevelOfEducation
             </label>
-            {errors.ExpectedSalary && touched.ExpectedSalary ? (
-              <p className="text-red-700">{errors.ExpectedSalary}</p>
+            {errors.HighestLevelOfEducation &&
+            touched.HighestLevelOfEducation ? (
+              <p className="text-red-700">{errors.HighestLevelOfEducation}</p>
             ) : null}
           </div>
-          {/* <div className="relative z-0 w-full mb-6 group">
-            <input
-              type="text"
-              name="position"
-              id="floating_password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              value={values.position}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              required
-            />
-            <label
-              htmlFor="floating_password"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Position
-            </label>
-            {errors.position && touched.position ? (
-              <p className="text-red-700">{errors.position}</p>
-            ) : null}
-          </div> */}
 
-          {/* <div>
-            <select
-              name="select"
-              className="block w-full px-4 py-3 text-base rounded-lg text-gray-900 bg-transparentborder-0 border-b-2 border-gray-300 dark:border-gray-600"
-              value={values.select}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            >
-              <option value="Job level">Job Level</option>
-              <option value="Junior">Junior</option>
-              <option value="Mid">Mid</option>
-              <option value="Senior">Senior</option>
-            </select>
-            {errors.select && touched.select ? (
-              <p className="text-red-700">{errors.select}</p>
-            ) : null}
-          </div> */}
           <button
             type="submit"
             className="w-44 h-12 mt-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"

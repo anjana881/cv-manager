@@ -38,7 +38,7 @@ const route = createBrowserRouter([
         element: <ShortlistCandidate />,
       },
       {
-        path: "profile/:serialNumber",
+        path: "profile/:Id",
         element: <Profile />,
       },
 

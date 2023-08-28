@@ -6,33 +6,36 @@ import "./Profile.css";
 
 import boy from "../Assests/129-1290805_person-head-and-shoulders-silhouette-hd-png-download.png";
 
-import girl from "../Assests/images.png";
+import { toast } from "react-toastify";
 const Profile = () => {
-  const { serialNumber } = useParams();
+  const { Id } = useParams();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.app.users);
-
+  console.log("id", Id);
   useEffect(() => {
     dispatch(getData());
   }, [dispatch]);
 
-  const currentUser = users.find(
-    (user) => user.serialNumber === Number(serialNumber)
-  );
+  const currentUser = users.find((user) => user.Id === Number(Id));
   const handleClick = () => {
-    dispatch(addShortListedUser(currentUser));
+    if (!users[currentUser.Id].shortListed) {
+      dispatch(addShortListedUser(currentUser));
+      toast("Candidate shortlisted sucessfully.", { type: "success" });
+    }
+    if (users[currentUser.Id].shortListed) {
+      return toast("Candidate already shortlisted", { type: "error" });
+    }
   };
-  // console.log("currentUsers:", currentUser);
   if (!currentUser) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="ProfileDetails  w-full p-12">
+    <div className="ProfileDetails  w-fit">
       <h1 className="text-2xl font-semibold mb-8">Profile Details</h1>
       <div className=" flex justify-evenly  ">
         <div className="image  w-[16%] h-[10%]  rounded-lg ">
-          <img src={boy} alt="image" className="mb-2" />
+          <img src={boy} alt="img" className="mb-2" />
 
           <h1 className="flex  font-semibold underline  ">
             Cv url:
@@ -108,8 +111,15 @@ const Profile = () => {
               </p>
             </h2>
           </div>
-          <button className="bg-blue-500 p-4" onClick={handleClick}>
-            Shortlist{" "}
+          <button
+            className={` p-3 text-white rounded-3xl w-[150px] mt-4 ${
+              users[currentUser.Id].shortListed
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#F53139]"
+            }`}
+            onClick={handleClick}
+          >
+            Shortlist
           </button>
         </div>
       </div>
