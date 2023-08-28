@@ -3,11 +3,13 @@ import { BsFillPersonFill, BsSignpostSplit } from "react-icons/bs";
 import { FaPeopleArrows } from "react-icons/fa";
 import { MdDashboard, MdOutlineAssessment } from "react-icons/md";
 import { SlEnvolopeLetter } from "react-icons/sl";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Sidebar = () => {
+  const user = useSelector((store) => store.app);
   return (
     <>
-      <div className=" flex flex-col items-center bg-slate-100 p-6 h-screen ">
+      <div className="flex flex-col items-center bg-slate-100 p-6 h-screen w-[280px] ">
         <h1 className="font-bold text-4xl"> Amnil </h1>
         <h1 className="font-bold text-3xl mb-1">Technologies</h1>
         <hr className="bg-black w-[100%] h-1 mb-8" />
@@ -35,6 +37,9 @@ const Sidebar = () => {
             <Link to="/shortlisted" className="text-lg font-semibold">
               Shortlisted Candidates
             </Link>
+            <p className="bg-blue-400 w-10 h-10 rounded-full flex justify-center items-center text-white -translate-x-6">
+              {user.shortListedUser.length}
+            </p>
           </li>
           <li className="flex items-center mb-6">
             <i className="mr-4">

@@ -28,7 +28,6 @@ const Profile = () => {
       return toast("Candidate already shortlisted", { type: "error" });
     }
   };
-  // console.log("currentUsers:", currentUser);
   if (!currentUser) {
     return <div>Loading...</div>;
   }
