@@ -13,7 +13,13 @@ const EditUser = () => {
   const { id } = useParams();
   console.log(id);
 
-  const existing = allUser.filter((item) => item.id == id);
+  const existing = allUser.filter((item) => {
+    if (item.Id == id) {
+      console.log("item", item.Id);
+      console.log("paramid1", id);
+      return item;
+    }
+  });
 
   console.log("exitstingID", existing);
   const [Id, setId] = useState(id);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../features/UserSlice";
+import { deleteUserData, getData } from "../features/UserSlice";
 import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import { useEffect } from "react";
@@ -29,6 +29,10 @@ const Applicants = () => {
   });
   const handleAdd = () => {
     navigate("/CreateForm");
+  };
+  const deleteUser = (ID) => {
+    console.log("first", ID);
+    dispatch(deleteUserData({ ID }));
   };
 
   return (
@@ -78,12 +82,12 @@ const Applicants = () => {
                 <Link to={`/editUser/${user?.Id}`} className="p-3">
                   <AiFillEdit />
                 </Link>
-                <i className="p-3">
+                <i onClick={() => deleteUser(user.Id)} className="p-3">
                   <AiFillDelete />
                 </i>
               </td>
             </tr>
-          ))}{" "}
+          ))}
         </tbody>
       </table>
     </div>

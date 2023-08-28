@@ -50,8 +50,14 @@ export const UserSlice = createSlice({
           ExperienceInMonthsWithCompanyName;
       }
     },
+    deleteUserData: (state, actions) => {
+      const { ID } = actions.payload;
+      console.log("id1", ID);
+      state.users = state.users.filter((user) => user.Id !== ID);
+    },
   },
 });
 export default UserSlice.reducer;
 
-export const { addShortListedUser, createUser, editUser } = UserSlice.actions;
+export const { addShortListedUser, createUser, editUser, deleteUserData } =
+  UserSlice.actions;
