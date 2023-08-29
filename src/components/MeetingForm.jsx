@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
+import Modal from "react-modal";
+import interviewer from "./Interviewer";
 
 const MeetingForm = ({
   selectedDate,
@@ -8,11 +9,17 @@ const MeetingForm = ({
   onSubmit,
   onDelete,
   eventData,
+  interviewers,
 }) => {
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [selectedInterviewer, setSelectedInterviewer] = useState("");
 
+  const handleInterviewerChange = (event) => {
+    setSelectedInterviewer(event.target.value);
+  };
+  console.log("interviewer", interviewer);
   useEffect(() => {
     if (eventData) {
       setTitle(eventData.title || "");
@@ -32,6 +39,7 @@ const MeetingForm = ({
             })
           : ""
       );
+      setSelectedInterviewer(eventData.selectedInterviewer || "");
     } else if (selectedDate) {
       const formattedTime = selectedDate.toLocaleTimeString([], {
         hour: "2-digit",
@@ -49,12 +57,14 @@ const MeetingForm = ({
       title,
       startTime: new Date(`2000-01-01T${startTime}`),
       endTime: new Date(`2000-01-01T${endTime}`),
+      selectedInterviewer,
     });
 
     // Clear form inputs after submission
     setTitle("");
     setStartTime("");
     setEndTime("");
+    setSelectedInterviewer("");
   };
 
   const handleDelete = () => {
@@ -70,6 +80,7 @@ const MeetingForm = ({
       <h2>{eventData ? "Edit Meeting" : "Schedule a Meeting"}</h2>
       <form onSubmit={handleSubmit}>
         <label>
+          {" "}
           Title:
           <input
             type="text"
@@ -96,6 +107,20 @@ const MeetingForm = ({
           />
         </label>
         <br />
+        <div>
+          <label>Select Interviewer: </label>
+          <select
+            value={selectedInterviewer}
+            onChange={handleInterviewerChange}
+          >
+            <option value="">Select an Interviewer</option>
+            {interviewers?.map((interviewer) => (
+              <option key={interviewer.Id} value={interviewer.Name}>
+                {interviewer.Name}
+              </option>
+            ))}
+          </select>
+        </div>
         <button type="submit">
           {eventData ? "Update Meeting" : "Schedule Meeting"}
         </button>

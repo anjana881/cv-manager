@@ -49,6 +49,14 @@ const Sidebar = () => {
               Interviews
             </Link>
           </li>
+          <li className="flex items-center mb-6">
+            <i className="mr-4">
+              <FaPeopleArrows />
+            </i>
+            <Link to="/interviewer" className="text-lg font-semibold">
+              Interviewers
+            </Link>
+          </li>
 
           <li className="flex items-center  mb-6">
             <i className="mr-4">

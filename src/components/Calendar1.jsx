@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import MeetingForm from "./MeetingForm";
+import { interviewerData } from "./Interviewer";
 
 const Calendar1 = () => {
   const [showForm, setShowForm] = useState(false);
@@ -37,6 +38,7 @@ const Calendar1 = () => {
         meetingData.endTime.getHours(),
         meetingData.endTime.getMinutes()
       ),
+      selectedInterviewer: meetingData.selectedInterviewer, // Include selectedInterviewer
     };
 
     setEvents([...events, newEvent]);
@@ -76,9 +78,21 @@ const Calendar1 = () => {
         }}
         height="90vh"
         dateClick={handleDateClick}
-        events={events}
         editable={true} // Enable event editing
         eventClick={handleEventClick} // Handle event click for editing
+        eventContent={(eventInfo) => (
+          <div>
+            <p>{eventInfo.timeText}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: eventInfo.event.title }}
+            />{" "}
+            {/* Use dangerouslySetInnerHTML */}
+          </div>
+        )}
+        events={events.map((event) => ({
+          ...event,
+          title: `${event.title}<br>Interviewer:${event.selectedInterviewer}`, // Customize event title
+        }))}
       />
       {showForm && (
         <MeetingForm
@@ -86,6 +100,7 @@ const Calendar1 = () => {
           onClose={handleFormClose}
           onSubmit={handleFormSubmit}
           onDelete={handleEventDelete}
+          interviewers={interviewerData}
         />
       )}
     </div>

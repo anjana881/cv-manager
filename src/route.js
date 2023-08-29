@@ -11,6 +11,7 @@ import Calendar1 from "./components/Calendar1";
 import OfferLetter from "./components/OfferLetter";
 import CreateForm from "./components/CreateForm";
 import EditUser from "./components/EditUser";
+import Interviewer from "./components/Interviewer";
 
 const route = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const route = createBrowserRouter([
       {
         path: "interviews",
         element: <Interviews />,
+      },
+      {
+        path: "interviewer",
+        element: <Interviewer />,
       },
 
       {
