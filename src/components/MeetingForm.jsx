@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import Modal from "react-modal";
-import interviewer from "./Interviewer";
-
 const MeetingForm = ({
   selectedDate,
   onClose,
@@ -10,6 +8,10 @@ const MeetingForm = ({
   onDelete,
   eventData,
   interviewers,
+  candidates,
+
+  selectedCandidate,
+  onSelectCandidate,
 }) => {
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -19,7 +21,11 @@ const MeetingForm = ({
   const handleInterviewerChange = (event) => {
     setSelectedInterviewer(event.target.value);
   };
-  console.log("interviewer", interviewer);
+  const handleCandidateChange = (event) => {
+    const selectedCandidateId = event.target.value;
+    onSelectCandidate(selectedCandidateId);
+  };
+  console.log("candidates", candidates);
   useEffect(() => {
     if (eventData) {
       setTitle(eventData.title || "");
@@ -58,6 +64,7 @@ const MeetingForm = ({
       startTime: new Date(`2000-01-01T${startTime}`),
       endTime: new Date(`2000-01-01T${endTime}`),
       selectedInterviewer,
+      selectedCandidate,
     });
 
     // Clear form inputs after submission
@@ -76,42 +83,72 @@ const MeetingForm = ({
   console.log("handleDelete", handleDelete);
 
   return (
-    <Modal isOpen={true} onRequestClose={onClose} contentLabel="Meeting Form">
-      <h2>{eventData ? "Edit Meeting" : "Schedule a Meeting"}</h2>
+    <Modal
+      isOpen={true}
+      onRequestClose={onClose}
+      contentLabel="Meeting Form"
+      className="bg-yellow-50 text-black w-fit p-8 h-[fit] mt-20 ml-4 rounded-3xl"
+    >
+      <h2 className="text-center font-bold text-xl underline mb-2">
+        {eventData ? "Edit Meeting" : "Schedule a Meeting"}
+      </h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          {" "}
-          Title:
+        <label className="flex">
+          <h3 className="font-semibold text-lg mb-2 mr-2">Title:</h3>
           <input
             type="text"
             value={title}
+            className="p-2 bg-slate-200 rounded-xl"
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
         <br />
-        <label>
-          Start Time:
+        <label className="flex">
+          <h3 className="font-semibold text-lg mb-2 mr-2">Start Time:</h3>
           <input
             type="time"
             value={startTime}
+            className="p-2 bg-slate-200 rounded-md"
             onChange={(e) => setStartTime(e.target.value)}
           />
         </label>
         <br />
-        <label>
-          End Time:
+        <label className="flex">
+          <h3 className="font-semibold text-lg mb-2 mr-2">End Time:</h3>
           <input
             type="time"
             value={endTime}
+            className="p-2 bg-slate-200 rounded-md"
             onChange={(e) => setEndTime(e.target.value)}
           />
         </label>
         <br />
-        <div>
-          <label>Select Interviewer: </label>
+        <div className="flex mb-2">
+          <h3 className="font-semibold text-lg mb-2 mr-2">
+            Select Candidate:{" "}
+          </h3>
+          <select
+            value={selectedCandidate}
+            onChange={handleCandidateChange}
+            className="p-2 bg-slate-200 rounded-xl"
+          >
+            <option value="">Select a Candidate</option>
+            {candidates?.map((candidate) => (
+              <option key={candidate.Id} value={candidate.FirstName}>
+                {candidate.FirstName} {candidate.LastName}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex">
+          <h3 className="font-semibold text-lg mb-2 mr-2">
+            Select Interviewer:{" "}
+          </h3>
           <select
             value={selectedInterviewer}
             onChange={handleInterviewerChange}
+            className="p-2 rounded-xl bg-slate-200"
           >
             <option value="">Select an Interviewer</option>
             {interviewers?.map((interviewer) => (
@@ -121,17 +158,26 @@ const MeetingForm = ({
             ))}
           </select>
         </div>
-        <button type="submit">
-          {eventData ? "Update Meeting" : "Schedule Meeting"}
-        </button>
-        {eventData && (
-          <button type="button" onClick={handleDelete}>
-            <AiFillDelete />
+        <div className="flex justify-evenly mt-4">
+          <button
+            type="submit"
+            className="p-3 text-black font-semibold bg-[#fd7277] rounded-2xl w-[fit]"
+          >
+            {eventData ? "Update Meeting" : "Schedule Meeting"}
           </button>
-        )}
-        <button type="button" onClick={onClose}>
-          Cancel
-        </button>
+          {eventData && (
+            <button type="button" onClick={handleDelete}>
+              <AiFillDelete />
+            </button>
+          )}
+          <button
+            type="button"
+            className="p-3 text-black font-semibold bg-[#fd7277] rounded-2xl w-[fit]"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </Modal>
   );

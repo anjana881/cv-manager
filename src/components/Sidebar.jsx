@@ -45,7 +45,7 @@ const Sidebar = () => {
             <i className="mr-4">
               <FaPeopleArrows />
             </i>
-            <Link to="/interviews" className="text-lg font-semibold">
+            <Link to="/schedule" className="text-lg font-semibold">
               Interviews
             </Link>
           </li>

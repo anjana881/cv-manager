@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import MeetingForm from "./MeetingForm";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import React, { useState } from "react";
 import { interviewerData } from "./Interviewer";
+import MeetingForm from "./MeetingForm";
+import { useLocation } from "react-router-dom";
 
 const Calendar1 = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
-
+  const [selectedCandidate, setSelectedCandidate] = useState();
+  const location = useLocation();
+  const candidates = location.state?.candidates || [];
+  console.log("candidtaessSS", candidates);
   const handleDateClick = (arg) => {
     setSelectedDate(arg.date);
     setShowForm(true);
@@ -22,8 +26,18 @@ const Calendar1 = () => {
   };
 
   const handleFormSubmit = (meetingData) => {
+    const formattedStartTime = meetingData.startTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const formattedEndTime = meetingData.endTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    console.log("Submitting form data:", meetingData);
     const newEvent = {
-      title: meetingData.title,
+      title: `Title:${meetingData.title}<br>Interviewer: ${meetingData.selectedInterviewer}<br>Candidate: ${selectedCandidate}<br>Time: ${formattedStartTime} - ${formattedEndTime}`,
       start: new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
@@ -38,23 +52,26 @@ const Calendar1 = () => {
         meetingData.endTime.getHours(),
         meetingData.endTime.getMinutes()
       ),
-      selectedInterviewer: meetingData.selectedInterviewer, // Include selectedInterviewer
+      selectedInterviewer: meetingData.selectedInterviewer,
+      selectedCandidate: selectedCandidate,
     };
+
+    console.log("New event:", newEvent);
 
     setEvents([...events, newEvent]);
     handleFormClose();
   };
 
   const handleEventClick = (arg) => {
-    // Open the MeetingForm with event details for editing
+    console.log("Event clicked:", arg.event);
     setShowForm(true);
     setSelectedDate(arg.event.start);
   };
-  const handleEventDelete = (arg) => {
-    console.log("handleEventDelete triggered");
-    const eventToDelete = arg.event; // Get the event object
 
-    // Compare events based on their properties (title, start, and end)
+  const handleEventDelete = (arg) => {
+    console.log("Deleting event:", arg.event);
+    const eventToDelete = arg.event;
+
     const updatedEvents = events.filter((event) => {
       return (
         event.title !== eventToDelete.title ||
@@ -78,20 +95,17 @@ const Calendar1 = () => {
         }}
         height="90vh"
         dateClick={handleDateClick}
-        editable={true} // Enable event editing
-        eventClick={handleEventClick} // Handle event click for editing
+        editable={true}
+        eventClick={handleEventClick}
         eventContent={(eventInfo) => (
           <div>
-            <p>{eventInfo.timeText}</p>
-            <p
-              dangerouslySetInnerHTML={{ __html: eventInfo.event.title }}
-            />{" "}
-            {/* Use dangerouslySetInnerHTML */}
+            {/* <p>{eventInfo.timeText}</p> */}
+            <p dangerouslySetInnerHTML={{ __html: eventInfo.event.title }} />
           </div>
         )}
         events={events.map((event) => ({
           ...event,
-          title: `${event.title}<br>Interviewer:${event.selectedInterviewer}`, // Customize event title
+          title: event.title,
         }))}
       />
       {showForm && (
@@ -101,6 +115,9 @@ const Calendar1 = () => {
           onSubmit={handleFormSubmit}
           onDelete={handleEventDelete}
           interviewers={interviewerData}
+          candidates={candidates}
+          // selectedCandidate={selectedCandidate}
+          onSelectCandidate={setSelectedCandidate}
         />
       )}
     </div>
